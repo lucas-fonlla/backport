@@ -5,6 +5,7 @@ namespace Wiledia\Backport;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 
 class BackportServiceProvider extends ServiceProvider
@@ -87,7 +88,7 @@ class BackportServiceProvider extends ServiceProvider
         }
 
         // Load settings into laravel from database.
-        if (Schema::hasTable('settings')) {
+        if (DB::connection()->getPdo() && Schema::hasTable('settings')) {
             foreach (Settings\Setting::all(['key', 'value']) as $setting) {
                 config([config('backport.setting.prefix') . '.' . $setting['key'] => $setting['value']]);
             }
