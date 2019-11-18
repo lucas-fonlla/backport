@@ -29,6 +29,13 @@
 </head>
 
 <body class="bp-page--loading-enabled bp-page--loading bp-sweetalert2--nopadding bp-header--static bp-header-mobile--fixed bp-aside--enabled bp-aside--fixed" id="backport">
+    @if (env('FACEBOOK_PIXEL_ENABLED'))
+    <script>
+    fbq('trackCustom', 'Admin', {
+        page: '{{url()->current()}}'
+    });
+    </script>
+    @endif
     <div class="bp-grid bp-grid--hor bp-grid--root">
         <div class="bp-grid__item bp-grid__item--fluid bp-grid bp-grid--ver bp-page">
 
